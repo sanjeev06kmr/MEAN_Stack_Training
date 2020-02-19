@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Post1",
+    "url": "URL1",
+    "text": "POST 1 Text",
+    "comments": [
+      {
+        "text": "Post 1 Comment 1"
+      }
+    ]
+  },
+  {
+    "name": "Post2",
+    "url": "URL2",
+    "text": "POST 2 Text",
+    "comments": [
+      {
+        "text": "Post 2 Comment 1"
+      }
+    ]
+  }
+]
