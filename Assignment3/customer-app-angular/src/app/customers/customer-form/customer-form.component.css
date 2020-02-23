@@ -1,0 +1,64 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+.imageClass{
+    width: 170px;
+    height: 120px;
+}
+
+.labeltd{
+    width: 150px;
+}
+
+.inputtd{
+    width: 450px;
+}
+
+.errordiv{
+    padding-left: 50px;
+    color: red;
+}
+
+.inputForm{
+    margin-top: 50px;
+    margin-left: 100px;
+    width: 900px;
+}
+
+
+*:focus {
+  outline: 2px solid;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+}
+
+.control {
+  margin: 6px 0;
+}
+
+label {
+  display: inline-block;
+  width: 120px;
+  vertical-align: top;
+}
+
+svg#definition {
+  display: none;
+}
+
+.icon {
+  width: 0.5em;
+  height: 0.5em;
+  fill: red;
+  vertical-align: top;
+}
+
+.required:after {
+    content:" *";
+    color: red;
+  }

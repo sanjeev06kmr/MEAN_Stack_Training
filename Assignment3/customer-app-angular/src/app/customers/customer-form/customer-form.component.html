@@ -1,0 +1,121 @@
+<form #customerForm="ngForm" class="inputForm" (ngSubmit)="submitCustomerForm(customerForm)">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="name" class="required">Name</label></td>
+                    <td class="inputtd"><input id="name" ngModel #firstName="ngModel" name="name"
+                            [(ngModel)]="customer.name" type="text" class="form-control" required /></td>
+                    <td>
+                        <div *ngIf="firstName.touched && firstName.invalid" class="invalid-feedback">
+                            <div  *ngIf="firstName.errors.required" class="errordiv">Name is required</div>
+                        </div>
+                    </td>
+
+                </table>
+
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd">
+                        <label for="gender">Gender</label>
+                    </td>
+                    <div class="form-control">
+
+                        <td>
+                            <label class="radio-inline">
+                                <input name="gender" [(ngModel)]="customer.gender" value="male" type="radio">
+                                Male</label>
+                            <label class="radio-inline">
+                                <input name="gender" [(ngModel)]="customer.gender" value="female" type="radio">
+                                Female</label>
+                        </td>
+                    </div>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="email" class="required">Email</label></td>
+                    <td class="inputtd"><input id="email" name="email" ngModel #email="ngModel" [(ngModel)]="customer.email" type="text"
+                            class="form-control" required email/></td>
+                            <td>
+                                <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
+                                    <div  *ngIf="email.errors.required" class="errordiv">Email is required</div>
+                                    <div *ngIf="email.errors.email" class="errordiv">Email is invalid</div>
+                                </div>
+                            </td>        
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="address">Address</label></td>
+                    <td class="inputtd"><textarea id="address" name="address" [(ngModel)]="customer.address" type="text"
+                            class="form-control">
+                </textarea></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="city">City</label></td>
+                    <td class="inputtd"><input id="city" name="city" [(ngModel)]="customer.city" type="text"
+                            class="form-control"></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="state">State</label></td>
+                    <td class="inputtd"><select id="state" name="state" [(ngModel)]="customer.state" type="text"
+                            class="form-control">
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="TamilNadu">TamilNadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Delhi">Delhi</option>
+                        </select></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="country">Country</label></td>
+                    <td class="inputtd"><select id="country" name="country" [(ngModel)]="customer.country" type="text"
+                            class="form-control">
+                            <option value="India">India</option>
+                        </select></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label>Hobbies</label></td>
+                    <td class="inputtd">
+                        <div class="form-control">
+                            <label class="checkbox-inline">
+                                <input id="cricket" name="cricket" [(ngModel)]="customer.cricket"
+                                    type="checkbox">Cricket</label>
+                            <label class="checkbox-inline">
+                                <input id="football" name="football" [(ngModel)]="customer.football"
+                                    type="checkbox">Football</label>
+
+
+                        </div>
+                    </td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label>Upload Pic</label></td>
+                    <td class="inputtd"><input type="file" (change)="onSelectedFile($event)" class="form-control"></td>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
+{{customerForm.value | json}}
