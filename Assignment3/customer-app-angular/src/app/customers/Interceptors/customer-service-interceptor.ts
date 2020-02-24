@@ -6,7 +6,8 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AppInterceptorService implements HttpInterceptor{
+export class CustomerServiceInterceptor
+ implements HttpInterceptor{
 
     private handleError(errorResponse:HttpErrorResponse){
         if(errorResponse.error instanceof ErrorEvent)

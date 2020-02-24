@@ -1,8 +1,8 @@
-import { CustomerService } from './services/customer.service';
-import { Customer } from './models/customer.model';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {customerFilter} from './pipe/customerFilter'
+import { CustomerService } from '../../services/customer.service';
+import { Customer } from '../../models/customer.model';
 
 @Component({
   selector: 'app-customer',

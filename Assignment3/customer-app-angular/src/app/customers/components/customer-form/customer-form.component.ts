@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CustomerService } from '../services/customer.service';
-import { Customer } from '../models/customer.model';
 import { NgForm } from '@angular/forms';
+import { Customer } from '../../models/customer.model';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer-form',
