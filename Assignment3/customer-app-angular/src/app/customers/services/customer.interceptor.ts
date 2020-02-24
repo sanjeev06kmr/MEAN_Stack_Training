@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerServiceInterceptor
+export class CustomerInterceptor
  implements HttpInterceptor{
 
     private handleError(errorResponse:HttpErrorResponse){
