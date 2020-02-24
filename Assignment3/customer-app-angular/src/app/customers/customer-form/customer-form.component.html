@@ -12,7 +12,7 @@
                             [(ngModel)]="customer.name" type="text" class="form-control" required /></td>
                     <td>
                         <div *ngIf="firstName.touched && firstName.invalid" class="invalid-feedback">
-                            <div  *ngIf="firstName.errors.required" class="errordiv">Name is required</div>
+                            <div appErrorMessage *ngIf="firstName.errors.required" >Name is required</div>
                         </div>
                     </td>
 
@@ -43,9 +43,9 @@
                     <td class="inputtd"><input id="email" name="email" ngModel #email="ngModel" [(ngModel)]="customer.email" type="text"
                             class="form-control" required email/></td>
                             <td>
-                                <div *ngIf="email.touched && email.invalid" class="invalid-feedback">
-                                    <div  *ngIf="email.errors.required" class="errordiv">Email is required</div>
-                                    <div *ngIf="email.errors.email" class="errordiv">Email is invalid</div>
+                                <div appErrorMessage *ngIf="email.touched && email.invalid" class="invalid-feedback">
+                                    <div  *ngIf="email.errors.required">Email is required</div>
+                                    <div appErrorMessage *ngIf="email.errors.email" >Email is invalid</div>
                                 </div>
                             </td>        
                 </table>

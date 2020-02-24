@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { customerFilter } from './pipe/customerFilter';
 import { AppInterceptorService } from './Interceptors/appInterceptorService';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { ErrorMessageDirective } from './directives/error-message.directive';
 //import { AppInterceptorService } from './appInterceptorService';
 ///
 
@@ -31,7 +32,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
     CreateCustomerComponent,
     EditCustomerComponent,
     customerFilter,
-    CustomerFormComponent
+    CustomerFormComponent,
+    ErrorMessageDirective
   ],
   imports: [
     CommonModule,
