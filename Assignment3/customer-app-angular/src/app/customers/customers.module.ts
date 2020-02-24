@@ -8,7 +8,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { customerFilter } from './pipes/customerFilter';
 import { ErrorMessageDirective } from './directives/error-message.directive';
 import { CustomerFormComponent } from './components/customer-form/customer-form.component';

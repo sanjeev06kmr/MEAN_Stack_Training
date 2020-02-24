@@ -20,6 +20,7 @@ export class CustomersComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
+  // Loads Customer List on INIT
   ngOnInit() {
     this.customerService.getCustomer().subscribe(
       response => {
