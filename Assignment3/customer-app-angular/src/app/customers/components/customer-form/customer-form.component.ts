@@ -11,8 +11,6 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class CustomerFormComponent implements OnInit {
 
-  gender = 'male';
-  country = 'india';
   selectedFile: File = null;
   formBuilder: any;
   customer: Customer;
@@ -27,21 +25,26 @@ export class CustomerFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-    if (id != undefined) {
-      console.log("AS there is Id present in Param, So it is rendered for editing Customer");
+    // IF this form is loaded to Edit Customer. get CustomerDetail by Id
+    if (this.title == "Edit Csutomer") {
+      let id = this.route.snapshot.paramMap.get('id');
+      console.log(id);
 
+      // FEtch Customer Detail based on id
       this.customerService.getCustomerById(id).subscribe(
         response => {
           console.log(response);
           this.customer = response.result;
           console.log(this.customer);
+        },
+        error => {
+          console.log('Error from Service:', error)
         }
       );
     }
     else{
-      console.log("AS there is No Id in Param, So it is rendered for Creating Customer");
+      // This Form id loaded to Addd CUstomer
+      console.log("This Form id loaded to Add Customer");
     }
   }
 
@@ -60,6 +63,7 @@ export class CustomerFormComponent implements OnInit {
     }
   }
 
+  // Adds Customer with Image.
   createCustomer(customerData: NgForm): void {
     console.log(customerData.value);
     const newCustomer: Customer = Object.assign({}, customerData.value);
@@ -76,14 +80,20 @@ export class CustomerFormComponent implements OnInit {
     formData.append('country', newCustomer.country);
     formData.append('hobbies', this.getHobbies(customerData));
 
+    // Calling service to Add New Customer.
     this.customerService.createCustomerWithImage(formData).subscribe(
       (data: Customer) => {
         console.log(data);
+        // After Adding Customer , Navigate to Main Customer PAge to list Customer
         this.router.navigate(['customers']);
+      },
+      error => {
+        console.log('Error from Service:', error)
       }
     )
   }
 
+  // Updates Existing Customer.
   updateCustomer(customerData: NgForm): void{
     console.log(customerData.value);
     const tempCustomer : Customer = Object.assign({}, customerData.value);
@@ -99,11 +109,15 @@ export class CustomerFormComponent implements OnInit {
     newCustomer.country = tempCustomer.country;
     newCustomer.hobbies=tempCustomer.hobbies;    
     
-    console.log(newCustomer);
+    // calling service to update EXisting Customer.
     this.customerService.editCustomer(this.customer._id, newCustomer).subscribe(
       (data:Customer)=>{
         console.log(data);
+        // After Editing Customer , Navigate to Main Customer PAge to list Customer.
         this.router.navigate(['customers']);
+      },
+      error => {
+        console.log('Error from Service:', error)
       }
     )
   }

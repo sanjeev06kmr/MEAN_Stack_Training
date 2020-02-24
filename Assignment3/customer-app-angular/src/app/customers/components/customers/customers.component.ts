@@ -11,63 +11,71 @@ import { Customer } from '../../models/customer.model';
   providers: [CustomerService]
 })
 export class CustomersComponent implements OnInit {
-  displayMode:number = 1;
-  customer: Customer[]=[];
-  image:string ='http://localhost:3000/image/1582300745833pic1.png';
- 
-  constructor(private customerService: CustomerService, 
-    private router :Router,
+  displayMode: number = 1;
+  customer: Customer[] = [];
+  defaultMessage: string = "Loading Customer List....";
+
+  constructor(private customerService: CustomerService,
+    private router: Router,
     private route: ActivatedRoute) {
-    //this.customer = this.customerService.getCustomer();
   }
 
   ngOnInit() {
     this.customerService.getCustomer().subscribe(
-      response =>{
+      response => {
         console.log(response);
-        
         this.customer = response.result;
+      },
+      error => {
+        this.defaultMessage ="Error Occured while fetching Customer List.";
+        console.log('Error from Service:', error)
       }
-    );     
+    );
   }
 
-  checkIfCustomerExist(){
+  // Checks if any customer exists or not.
+  checkIfCustomerExist() {
     console.log(this.customer);
-    if (this.customer ! = undefined && this.customer.length>0)
-    {
-      console.log('>0');
+    if (this.customer! = undefined && this.customer.length > 0) {
+      console.log('customer>0');
       return true;
     }
-    else{
+    else {      
+      this.defaultMessage ="No Customer exits. Please Add using Create Customer";
       return false;
     }
   }
 
+  // Toggles between Card View and List View
   onDisplayModeChange(mode: number): void {
-        this.displayMode = mode;
+    this.displayMode = mode;
   }
 
+  // Navigate to Edit Customer Page.
   onEdit($event): void {
     console.log($event.target.getAttribute('custId'));
 
-    let customerId=$event.target.getAttribute('custId');
-    this.router.navigate(['customers/editCustomer',customerId]);
+    let customerId = $event.target.getAttribute('custId');
+    this.router.navigate(['customers/editCustomer', customerId]);
   }
 
+  // Deletes User by calling service and 
+  // Updates Customer object to reflect the same on screen.
   onDelete($event): void {
-    let customerId=$event.target.getAttribute('custId');
+    let customerId = $event.target.getAttribute('custId');
     console.log(customerId);
 
     this.customerService.deleteCustomer(customerId).subscribe(
-      response =>{
-        console.log(response);        
-      }
+      response => {
+        console.log(response);
+      },
+      error => console.log('Error from Service:', error)
     );
 
     // Refresh Customer object after deletion.
-    const item = this.customer.find(item => item._id === customerId);    
+    const item = this.customer.find(item => item._id === customerId);
     console.log(this.customer.length);
-    this.customer.splice(this.customer.indexOf(item),1);
+    this.customer.splice(this.customer.indexOf(item), 1);
     console.log(this.customer.length);
   }
 }

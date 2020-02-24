@@ -10,12 +10,6 @@ const routes: Routes = [
   { path: 'editCustomer/:id', component: EditCustomerComponent },
 ];
 
-// const routes: Routes = [
-//   { path: '', component: CustomersComponent },
-//   { path: 'customers1', component: CreateCustomerComponent },
-//   { path: '', redirectTo: '/', pathMatch: 'full' }
-// ]
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
