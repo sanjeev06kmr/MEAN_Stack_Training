@@ -14,6 +14,8 @@ export class CustomerFormComponent implements OnInit {
   selectedFile: File = null;
   formBuilder: any;
   customer: Customer;
+  isCricketActive: boolean = false;
+  isFootballActive: boolean = false;
 
   //Title coming from Parent Component where this Component will be rendered
   @Input('title') title: string;
@@ -35,6 +37,15 @@ export class CustomerFormComponent implements OnInit {
         response => {
           console.log(response);
           this.customer = response.result;
+
+          // Select Hobbies checkbox based on fetched result
+          if (this.customer.hobbies.toLowerCase().indexOf('football') != -1) {
+            this.isFootballActive = true;
+          }
+          if (this.customer.hobbies.toLowerCase().indexOf('cricket') != -1) {
+            this.isCricketActive = true;
+          }
+
           console.log(this.customer);
         },
         error => {
@@ -42,7 +53,7 @@ export class CustomerFormComponent implements OnInit {
         }
       );
     }
-    else{
+    else {
       // This Form id loaded to Addd CUstomer
       console.log("This Form id loaded to Add Customer");
     }
@@ -53,11 +64,11 @@ export class CustomerFormComponent implements OnInit {
     console.log(this.selectedFile);
   }
 
-  submitCustomerForm(customerData: NgForm){
-    if(this.title=="Add Customer"){
+  submitCustomerForm(customerData: NgForm) {
+    if (this.title == "Add Customer") {
       // Add Customer
       this.createCustomer(customerData);
-    }else{
+    } else {
       // Edit Customer
       this.updateCustomer(customerData);
     }
@@ -78,12 +89,13 @@ export class CustomerFormComponent implements OnInit {
     formData.append('city', newCustomer.city);
     formData.append('state', newCustomer.state);
     formData.append('country', newCustomer.country);
-    formData.append('hobbies', this.getHobbies(customerData));
+    formData.append('hobbies', this.getHobbies());
 
     // Calling service to Add New Customer.
     this.customerService.createCustomerWithImage(formData).subscribe(
       (data: Customer) => {
         console.log(data);
+        alert("Customer Added.");
         // After Adding Customer , Navigate to Main Customer PAge to list Customer
         this.router.navigate(['customers']);
       },
@@ -94,25 +106,26 @@ export class CustomerFormComponent implements OnInit {
   }
 
   // Updates Existing Customer.
-  updateCustomer(customerData: NgForm): void{
+  updateCustomer(customerData: NgForm): void {
     console.log(customerData.value);
-    const tempCustomer : Customer = Object.assign({}, customerData.value);
+    const tempCustomer: Customer = Object.assign({}, customerData.value);
 
-    var newCustomer : Customer = new Customer();
-    newCustomer._id=this.customer._id;
-    newCustomer.name=tempCustomer.name;
-    newCustomer.email=tempCustomer.email;
+    var newCustomer: Customer = new Customer();
+    newCustomer._id = this.customer._id;
+    newCustomer.name = tempCustomer.name;
+    newCustomer.email = tempCustomer.email;
     newCustomer.gender = tempCustomer.gender;
     newCustomer.address = tempCustomer.address;
-    newCustomer.city=tempCustomer.city;
-    newCustomer.state=tempCustomer.state;
+    newCustomer.city = tempCustomer.city;
+    newCustomer.state = tempCustomer.state;
     newCustomer.country = tempCustomer.country;
-    newCustomer.hobbies=tempCustomer.hobbies;    
-    
+    newCustomer.hobbies = this.getHobbies();
+
     // calling service to update EXisting Customer.
     this.customerService.editCustomer(this.customer._id, newCustomer).subscribe(
-      (data:Customer)=>{
+      (data: Customer) => {
         console.log(data);
+        alert("Customer Updated.");
         // After Editing Customer , Navigate to Main Customer PAge to list Customer.
         this.router.navigate(['customers']);
       },
@@ -123,14 +136,14 @@ export class CustomerFormComponent implements OnInit {
   }
 
   // Get Hobbies text based on CheckBox selected
-  private getHobbies(customerData: NgForm) {
+  private getHobbies() {
     let hobbies = "";
-    if (customerData.controls['cricket'].value !== undefined &&
-      customerData.controls['cricket'].value) {
+    console.log('Cricket', this.isCricketActive);
+    console.log('Football', this.isCricketActive);
+    if (this.isCricketActive) {
       hobbies = hobbies.length > 0 ? hobbies + ', Cricket' : 'Cricket';
     }
-    if (customerData.controls['football'].value !== undefined &&
-      customerData.controls['football'].value == true) {
+    if (this.isFootballActive) {
       hobbies = hobbies.length > 0 ? hobbies + ', Football' : 'Football';
     }
     return hobbies;
