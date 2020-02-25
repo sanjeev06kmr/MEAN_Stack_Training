@@ -39,10 +39,12 @@ export class CustomerFormComponent implements OnInit {
           this.customer = response.result;
 
           // Select Hobbies checkbox based on fetched result
-          if (this.customer.hobbies.toLowerCase().indexOf('football') != -1) {
+          if (this.customer.hobbies != undefined &&
+            this.customer.hobbies.toLowerCase().indexOf('football') != -1) {
             this.isFootballActive = true;
           }
-          if (this.customer.hobbies.toLowerCase().indexOf('cricket') != -1) {
+          if (this.customer.hobbies != undefined &&
+            this.customer.hobbies.toLowerCase().indexOf('cricket') != -1) {
             this.isCricketActive = true;
           }
 

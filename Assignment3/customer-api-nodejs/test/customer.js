@@ -11,6 +11,7 @@ describe("Server!", () => {
             .request(app)
             .get("/customer/")
             .end((err, res) => {
+                console.log('RES-'+res.body.message);
                 expect(res).to.have.status(200);
                 expect(res.body.status).to.equals(true);
                 expect(res.body.message).to.equals("Success");
@@ -18,8 +19,18 @@ describe("Server!", () => {
             });
     });
 
+    it("gets array of customer!!", done => {
+        chai
+            .request(app)
+            .get("/customer/")
+            .end((err, res) => {
+                res.body.should.be.a('object');
+                done();
+            });
+    });
+
     it("Gets Customer by id!!", done => {
-        const customerId = '5e51fc7283e2914e0ca582de';
+        const customerId = '5e552b2a2a3385548855c1a1';
         chai
             .request(app)
             .get("/customer/" + customerId)
@@ -31,9 +42,8 @@ describe("Server!", () => {
             });
     });
 
-    it("Update Customer", done => {
+    it("Adds Customer", done => {
         const dummyCustomer = {
-            '_id': '5e51fc7283e2914e0ca582de',
             "name": "Mamta sss",
             'gender': 'female',
             'email': 'mamta@gmail.comaasssss',
@@ -42,7 +52,31 @@ describe("Server!", () => {
             'state': 'Maharashtra',
             'country': 'India'
         };
-        const customerId = '5e51fc7283e2914e0ca582de';
+
+        chai
+            .request(app)
+            .post("/customer/")
+            .send(dummyCustomer)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.status).to.equals(true);
+                expect(res.body.message).to.equals("Success");
+                done();
+            });
+    });
+
+    it("Update Customer", done => {
+        const dummyCustomer = {
+            '_id': '5e552b2a2a3385548855c1a1',
+            "name": "Mamta sss",
+            'gender': 'female',
+            'email': 'mamta@gmail.comaasssss',
+            'address': 'Baner',
+            'city': 'pune',
+            'state': 'Maharashtra',
+            'country': 'India'
+        };
+        const customerId = '5e552b2a2a3385548855c1a1';
 
         chai
             .request(app)
@@ -56,6 +90,7 @@ describe("Server!", () => {
             });
     });
 
+
     it("Delete Customer!!", done => {
         const customerId = '5e51fc7283e2914e0ca582de';
         chai
@@ -65,6 +100,16 @@ describe("Server!", () => {
                 expect(res).to.have.status(200);
                 expect(res.body.status).to.equals(true);
                 expect(res.body.message).to.equals("Success");
+                done();
+            });
+    });
+
+    it("Fails to load customer from server. Incorrect Url!!", done => {
+        chai
+            .request(app)
+            .get("/customer1/")
+            .end((err, res) => {
+                expect(res).to.have.status(404);
                 done();
             });
     });

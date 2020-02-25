@@ -14,6 +14,8 @@ import { CustomerFormComponent } from './components/customer-form/customer-form.
 import { CustomersComponent } from './components/customers/customers.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
+import { CustomerListComponent } from './components/customer-list/customer-list.component';
+import { CustomerCardComponent } from './components/customer-card/customer-card.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { EditCustomerComponent } from './components/edit-customer/edit-customer.
     EditCustomerComponent,
     customerFilter,
     CustomerFormComponent,
-    ErrorMessageDirective
+    ErrorMessageDirective,
+    CustomerListComponent,
+    CustomerCardComponent
   ],
   imports: [
     CommonModule,

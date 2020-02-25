@@ -29,7 +29,7 @@ export class CustomersComponent implements OnInit {
         this.checkIfCustomerExist();
       },
       error => {
-        this.defaultMessage ="Error Occured while fetching Customer List.";
+        this.defaultMessage = "Error Occured while fetching Customer List.";
         console.log('Error from Service:', error)
       }
     );
@@ -37,15 +37,15 @@ export class CustomersComponent implements OnInit {
 
   // Checks if any customer exists or not.
   checkIfCustomerExist() {
-    console.log("hhhh"+this.customer);
+    console.log("hhhh" + this.customer);
     if (this.customer.length > 0) {
-      console.log("Customer Length:"+this.customer.length);
+      console.log("Customer Length:" + this.customer.length);
       return true;
     }
-    else {   
-      console.log('customer not greater than 0'); 
-      this.customer =[];  
-      this.defaultMessage ="No Customer exits. Please Add using Create Customer";
+    else {
+      console.log('customer not greater than 0');
+      this.customer = [];
+      this.defaultMessage = "No Customer exits. Please Add using Create Customer";
       return false;
     }
   }
@@ -55,18 +55,17 @@ export class CustomersComponent implements OnInit {
     this.displayMode = mode;
   }
 
+  // This is being called from Child COmponent.
   // Navigate to Edit Customer Page.
-  onEdit($event): void {
-    console.log($event.target.getAttribute('custId'));
-
-    let customerId = $event.target.getAttribute('custId');
+  onEditParent(customerId): void {
+    console.log("customerId from child is : " + customerId);
     this.router.navigate(['customers/editCustomer', customerId]);
   }
 
+  // NOTE: This is being called from Child Component.
   // Deletes User by calling service and 
   // Updates Customer object to reflect the same on screen.
-  onDelete($event): void {
-    let customerId = $event.target.getAttribute('custId');
+  onDeleteParent(customerId): void {
     console.log(customerId);
 
     this.customerService.deleteCustomer(customerId).subscribe(
@@ -75,6 +74,8 @@ export class CustomersComponent implements OnInit {
       },
       error => console.log('Error from Service:', error)
     );
+
+
 
     // Refresh Customer object after deletion.
     const item = this.customer.find(item => item._id === customerId);

@@ -4,11 +4,11 @@
 <div *ngIf="customer.length>0; then customerList; else noRecord"></div>
 <ng-template #customerList>
     <table style="width: 92%; margin-left: 50px;">
-        <tr >
+        <tr>
             <td>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search By Name" style="width: 300px;"
-                    name="searchTerm" [(ngModel)]="searchTerm" />
+                    <!-- <input type="text" class="form-control" placeholder="Search By Name" style="width: 300px;"
+                        name="searchTerm" [(ngModel)]="searchTerm" /> -->
                 </div>
             </td>
             <td>
@@ -25,97 +25,21 @@
             </td>
         </tr>
     </table>
-    <div class="row" *ngIf="displayMode === 1">
 
+<!-- CARD VIEW -->
+        <div class="row" *ngIf="displayMode === 1">
+            <app-customer-card [customer]="customer" (notifyEdit)="onEditParent($event)"
+                (notifyDelete)="onDeleteParent($event)">
+                </app-customer-card>
 
-        <div class="cardContainer panel panel-primary " *ngFor="let cust of customer | customerFilter: searchTerm">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{cust.name | uppercase}}</h3>
-            </div>
-            <div class="page-item panel-body">
-                <div class="col-xs-10">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <img class="imageClass" [src]="cust.imageUrl">
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="row">
-                                <div class="col-xs-6">Gender</div>
-                                <div class="col-xs-6">:{{cust.gender}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">Email</div>
-                                <div class="col-xs-6">:{{cust.email}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">Address</div>
-                                <div class="col-xs-6">:{{cust.address}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">City</div>
-                                <div class="col-xs-6">:{{cust.city}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">State</div>
-                                <div class="col-xs-6">:{{cust.state}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">Country</div>
-                                <div class="col-xs-6">:{{cust.country}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6">Hobbies</div>
-                                <div class="col-xs-6">:{{cust.hobbies}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <button type="button" class="btn btn-primary" (click)="onEdit($event)" style='margin-right:10px'
-                    [attr.custId]="cust._id">Edit</button>
-                <button type="button" class="btn btn-danger" (click)="onDelete($event)" style='margin-right:10px'
-                    [attr.custId]="cust._id">Delete</button>
-            </div>
-        </div>
-    </div>
-    <div class="row" *ngIf="displayMode === 2">
-        <div class="listContainer  panel panel-primary">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-condensed">
-                    <thead>
-                        <tr style="background-color: #337ab7;">
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Gender</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Country</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let cust of customer | customerFilter: searchTerm">
-                            <td>{{cust.name}}</td>
-                            <td>{{cust.email}}</td>
-                            <td>{{cust.gender}}</td>
-                            <td>{{cust.city}}</td>
-                            <td>{{cust.state}}</td>
-                            <td>{{cust.country}}</td>
-                            <td>
-                                <button type="button" class="btn btn-primary" (click)="onEdit($event)"
-                                    style='margin-right:10px' [attr.custId]="cust._id">Edit</button>
-                                <button type="button" class="btn btn-danger" (click)="onDelete($event)"
-                                    style='margin-right:10px' [attr.custId]="cust._id">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
         </div>
 
+<!-- LIST VIEW -->
+        <div class="row" *ngIf="displayMode === 2">
+            <app-customer-list [customer]="customer" (notifyEdit)="onEditParent($event)"
+                (notifyDelete)="onDeleteParent($event)"></app-customer-list>
 
-    </div>
+        </div>
 </ng-template>
 
 <ng-template #noRecord>
