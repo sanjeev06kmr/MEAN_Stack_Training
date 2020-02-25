@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 const assert = require('assert');
 
-const db_url= process.env.DB_URL_LOCAL;
+const db_url= process.env.DB_URL_ATLAS;
+console.log(db_url);
 
 mongoose.connect(
     db_url,
