@@ -26,6 +26,7 @@ export class CustomersComponent implements OnInit {
       response => {
         console.log(response);
         this.customer = response.result;
+        this.checkIfCustomerExist();
       },
       error => {
         this.defaultMessage ="Error Occured while fetching Customer List.";
@@ -36,12 +37,14 @@ export class CustomersComponent implements OnInit {
 
   // Checks if any customer exists or not.
   checkIfCustomerExist() {
-    console.log(this.customer);
-    if (this.customer! = undefined && this.customer.length > 0) {
-      console.log('customer>0');
+    console.log("hhhh"+this.customer);
+    if (this.customer.length > 0) {
+      console.log("Customer Length:"+this.customer.length);
       return true;
     }
-    else {      
+    else {   
+      console.log('customer not greater than 0'); 
+      this.customer =[];  
       this.defaultMessage ="No Customer exits. Please Add using Create Customer";
       return false;
     }
@@ -78,5 +81,6 @@ export class CustomersComponent implements OnInit {
     console.log(this.customer.length);
     this.customer.splice(this.customer.indexOf(item), 1);
     console.log(this.customer.length);
+    this.checkIfCustomerExist();
   }
 }
