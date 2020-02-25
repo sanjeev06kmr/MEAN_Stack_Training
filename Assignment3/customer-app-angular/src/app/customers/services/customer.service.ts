@@ -16,7 +16,7 @@ export class CustomerService {
    }
 
    // NOTE: For API calls, errors are being handled at interceptor level.
-
+   
   getCustomer():Observable<any>{
     return this.http.get<any>(this.url)
   }

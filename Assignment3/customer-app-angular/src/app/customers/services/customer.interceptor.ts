@@ -29,7 +29,7 @@ export class CustomerInterceptor
                 headers: req.headers.set('Content-Type', 'application/json')
             });
         }
-
+        
         return next.handle(clone)
         .pipe(catchError(this.handleError));
     }
@@ -38,6 +38,7 @@ export class CustomerInterceptor
     private handleError(errorResponse:HttpErrorResponse){
         let errorMessage = '';
 
+        
         if(errorResponse.error instanceof ErrorEvent)
         {
           console.error("Client Side Error: "+errorResponse.error);

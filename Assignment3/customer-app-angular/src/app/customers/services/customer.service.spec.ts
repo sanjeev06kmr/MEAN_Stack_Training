@@ -15,51 +15,6 @@ describe('CustomerService', () => {
       providers: [CustomerService]
     });
 
-    afterEach(()=>{
-      httpMock.verify
-    });
-    service = TestBed.get(CustomerService);
-    httpMock = TestBed.get(HttpTestingController);
-
-    it('should be get data using GET', () => {
-      const dummy: Customer[] = [
-        {
-          "_id": "5e51fc4f83e2914e0ca582dd",
-          "name": "Mamta Kumari",
-          "gender": "female",
-          "email": "mamta.kumari@gmail.com",
-          "address": "Baner",
-          "city": "Pune",
-          "state": "Maharashtra",
-          "country": "India",
-          "hobbies": "Football",
-          "imageUrl": ""
-        },
-        {
-          "_id": "5e51fc7283e2914e0ca582de",
-          "name": "Mamta Kumari",
-          "gender": "female",
-          "email": "mamta.kumari@gmail.com",
-          "address": "Baner",
-          "city": "Pune",
-          "state": "Maharashtra",
-          "country": "India",
-          "hobbies": "Football",
-          "imageUrl": ""
-        }
-      ]
-
-      service.getCustomer().subscribe(customers=>{
-        expect(customers.length).toBe(2);
-        expect(customers).toEqual(dummy);
-      });
-
-      const request = httpMock.expectOne ('http://localhost:3000/customer' );
-      expect(request.request.method).toBe('GET');
-
-      request.flush(dummy);
-    });
-
-
+    
   });
 })
