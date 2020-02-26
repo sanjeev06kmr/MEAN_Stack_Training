@@ -9,21 +9,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HomePageComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
+  constructor(private formBuilder: FormBuilder) {
     this.registerForm = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['',  [Validators.required, Validators.email]],
     });
-}
-onSubmit() {
-  this.submitted = true;
-
-  // stop here if form is invalid
-  if (this.registerForm.invalid) {
-      return;
   }
-}
+
+  ngOnInit() {}
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+      return;
+    }
+  }
 
 }

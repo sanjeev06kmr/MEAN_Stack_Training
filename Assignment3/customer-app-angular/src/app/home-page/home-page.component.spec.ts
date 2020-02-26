@@ -27,14 +27,16 @@ describe('HomePageComponent', () => {
     expect(component.registerForm.contains('lastName')).toBeTruthy();
   });
 
-  // it('should make the Name control required.', () => {
-  //   let control = component.registerForm.get('firstName');
-  //   control.setValue('');
-  //   expect(control.valid).toBeFalsy();
-  // });
+  it('should make the Name control required.', () => {
+    let control = component.registerForm.get('firstName');
+    control.setValue('');
+    expect(control.valid).toBeFalsy();
+  });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should make the Email control with Valid Email.', () => {
+    let control = component.registerForm.get('email');
+    control.setValue('sandj');
+    expect(control.valid).toBeFalsy();
+  });
 
 });
