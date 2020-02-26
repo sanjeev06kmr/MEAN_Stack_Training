@@ -1,1 +1,31 @@
 <h1 class="home">Welcome to Customer-App!!!</h1>
+<h3 class="home">Please click on Customers Link to view Customers</h3>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="card m-3">
+    <h5 style="background-color:crimson;" class="card-header">This is Sample Registration Form for Unit Test Purpose Only</h5>
+    <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    
+                </div>
+                <div class="form-group col-5">
+                    <label>First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                </div>
+                <div class="form-group col-5">
+                    <label>Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -92,6 +92,8 @@ export class CustomerFormComponent implements OnInit {
     formData.append('country', newCustomer.country);
     formData.append('hobbies', this.getHobbies());
 
+    console.log(formData);
+    
     // Calling service to Add New Customer.
     this.customerService.createCustomerWithImage(formData).subscribe(
       (data: Customer) => {
