@@ -55,7 +55,7 @@ export class CustomersComponent implements OnInit {
     this.displayMode = mode;
   }
 
-  // This is being called from Child COmponent.
+  // NOTE: This is being called from Child COmponent.
   // Navigate to Edit Customer Page.
   onEditParent(customerId): void {
     console.log("customerId from child is : " + customerId);
@@ -74,8 +74,6 @@ export class CustomersComponent implements OnInit {
       },
       error => console.log('Error from Service:', error)
     );
-
-
 
     // Refresh Customer object after deletion.
     const item = this.customer.find(item => item._id === customerId);

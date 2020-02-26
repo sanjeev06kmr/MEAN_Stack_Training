@@ -7,8 +7,6 @@
         <tr>
             <td>
                 <div class="form-group">
-                    <!-- <input type="text" class="form-control" placeholder="Search By Name" style="width: 300px;"
-                        name="searchTerm" [(ngModel)]="searchTerm" /> -->
                 </div>
             </td>
             <td>
@@ -31,14 +29,12 @@
             <app-customer-card [customer]="customer" (notifyEdit)="onEditParent($event)"
                 (notifyDelete)="onDeleteParent($event)">
                 </app-customer-card>
-
         </div>
 
 <!-- LIST VIEW -->
         <div class="row" *ngIf="displayMode === 2">
             <app-customer-list [customer]="customer" (notifyEdit)="onEditParent($event)"
                 (notifyDelete)="onDeleteParent($event)"></app-customer-list>
-
         </div>
 </ng-template>
 
