@@ -37,6 +37,9 @@ describe('HomePageComponent', () => {
     let control = component.registerForm.get('email');
     control.setValue('sandj');
     expect(control.valid).toBeFalsy();
+
+    control.setValue('sanjeev@gmail.com');
+    expect(control.valid).toBeTruthy();
   });
 
 });
