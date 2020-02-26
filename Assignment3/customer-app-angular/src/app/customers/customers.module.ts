@@ -6,7 +6,7 @@ import { MatSortModule, MatTableModule } from '@angular/material';
 import { CustomerService } from './services/customer.service';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { customerFilter } from './pipes/customerFilter';
 import { ErrorMessageDirective } from './directives/error-message.directive';
@@ -16,6 +16,7 @@ import { CreateCustomerComponent } from './components/create-customer/create-cus
 import { EditCustomerComponent } from './components/edit-customer/edit-customer.component';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { CustomerCardComponent } from './components/customer-card/customer-card.component';
+import { CustomerFormReactiveComponent } from './components/customer-form-reactive/customer-form-reactive.component';
 
 
 @NgModule({
@@ -27,13 +28,15 @@ import { CustomerCardComponent } from './components/customer-card/customer-card.
     CustomerFormComponent,
     ErrorMessageDirective,
     CustomerListComponent,
-    CustomerCardComponent
+    CustomerCardComponent,
+    CustomerFormReactiveComponent
   ],
   imports: [
     CommonModule,
     CustomersRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CustomerService,
     {

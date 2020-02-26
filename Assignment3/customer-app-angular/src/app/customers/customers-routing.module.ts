@@ -1,3 +1,4 @@
+import { CustomerFormReactiveComponent } from './components/customer-form-reactive/customer-form-reactive.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomersComponent } from './components/customers/customers.component';
@@ -8,6 +9,7 @@ const routes: Routes = [
   { path: '', component: CustomersComponent },
   { path: 'createCustomer', component: CreateCustomerComponent },
   { path: 'editCustomer/:id', component: EditCustomerComponent },
+  { path: 'createCustomerReactive', component: CustomerFormReactiveComponent }
 ];
 
 @NgModule({

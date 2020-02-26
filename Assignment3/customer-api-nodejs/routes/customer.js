@@ -168,13 +168,14 @@ function createCustomerWithImage(req, res) {
                 let bSuccess = true;
                 // If Error.
                 if (error) {
+                    console.log(error);
                     bSuccess=false;
                 }
 
                 res.status(bSuccess?200:500).json({
                     status: bSuccess,
                     message: bSuccess?"Success":"Error",
-                    result: result,
+                    result: bSuccess?result:error,
                 });
             }
         );

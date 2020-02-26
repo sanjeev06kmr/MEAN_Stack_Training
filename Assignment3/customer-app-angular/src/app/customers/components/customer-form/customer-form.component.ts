@@ -12,7 +12,6 @@ import { CustomerService } from '../../services/customer.service';
 export class CustomerFormComponent implements OnInit {
 
   selectedFile: File = null;
-  formBuilder: any;
   customer: Customer;
   isCricketActive: boolean = false;
   isFootballActive: boolean = false;

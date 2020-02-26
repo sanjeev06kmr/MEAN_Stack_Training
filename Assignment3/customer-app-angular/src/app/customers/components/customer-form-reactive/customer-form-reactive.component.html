@@ -1,0 +1,106 @@
+<form [formGroup]="customerForm" class="inputForm" (ngSubmit)="submitCustomerForm()">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="name" class="required">Name</label></td>
+                    <td class="inputtd"><input type="text" formControlName="name" class="form-control" /></td>
+                    <td>
+                        <div *ngIf="customerForm.controls.name.invalid && customerForm.controls.name.touched" >
+                            <div appErrorMessage *ngIf="customerForm.controls.name.errors.required">Name is required.</div>
+                          </div>
+                    </td>
+
+                </table>
+
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd">
+                        <label for="gender">Gender</label>
+                    </td>
+                    <div class="form-control">
+
+                        <td>
+                            <label class="radio-inline">
+                                <input name="gender" formControlName="gender" value="male" type="radio" >
+                                Male</label>
+                            <label class="radio-inline">
+                                <input name="gender" formControlName="gender" value="female" type="radio">
+                                Female</label>
+                        </td>
+                    </div>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="email" class="required">Email</label></td>
+                    <td class="inputtd"><input name="email" formControlName="email" type="text" class="form-control" /></td>
+                            <td>
+                                <div *ngIf="customerForm.controls.email.invalid && customerForm.controls.email.touched">
+                                    <div appErrorMessage *ngIf="customerForm.controls.email.errors.required">EmailId is required.</div>
+                                    <div  appErrorMessage *ngIf="customerForm.controls.email.errors.email">EmailId must be a valid email address.</div>
+                                  </div>
+                            </td>        
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="address">Address</label></td>
+                    <td class="inputtd"><textarea formControlName="address" type="text" class="form-control">
+                </textarea></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="city">City</label></td>
+                    <td class="inputtd"><input formControlName="city" type="text" class="form-control"></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="state">State</label></td>
+                    <td class="inputtd"><select formControlName="state" type="text" class="form-control">
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="TamilNadu">TamilNadu</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Delhi">Delhi</option>
+                        </select></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label for="country">Country</label></td>
+                    <td class="inputtd"><select  formControlName="country" class="form-control">
+                            <option value="India">India</option>
+                        </select></td>
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label>Hobbies</label></td>
+                <label  formArrayName="hobbies" *ngFor="let hobbie of customerForm.controls.hobbies.controls; let i = index">
+                    <input type="checkbox" [formControlName]="i">
+                    {{hobbies[i].hobbie}}
+                  </label>  
+                </table>
+            </div>
+            <div class="form-group">
+                <table>
+                    <td class="labeltd"><label>Upload Pic</label></td>
+                    <td class="inputtd"><input formControlName="upload" type="file" (change)="onSelectedFile($event)" class="form-control"></td>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <button type="submit" [disabled]="!customerForm.valid" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</form>
+
